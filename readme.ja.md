@@ -34,9 +34,9 @@
 - app.cs
     ```csharp:app.cs
     #!/usr/bin/env -S dotnet run --file
-    #:package RefFile@0.1.0
+    #:package RefFile@0.1.1
 
-    [assembly: RefFile("common.cs1")]
+    [assembly: RefFile("common.cs")]
 
     var data = new CommonData("abc");
     data.Print();
