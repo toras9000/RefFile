@@ -1,0 +1,15 @@
+#!/usr/bin/env -S dotnet run --file 
+#:package MimeKit@4.14.0
+#define CAPITAL
+
+public static partial class Utility
+{
+    public static void PrintTwo()
+    {
+#if CAPITAL
+        Console.WriteLine("TWO.");
+#else
+        Console.WriteLine("Two.");
+#endif
+    }
+}

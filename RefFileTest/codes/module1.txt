@@ -1,0 +1,9 @@
+#:package NodaTime@3.2.2
+
+public static partial class Utility
+{
+    public static void PrintOne()
+    {
+        Console.WriteLine("One.");
+    }
+}

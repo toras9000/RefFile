@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="RefFile/RefFile.csproj" />
+  <Project Path="RefFileTest/RefFileTest.csproj" Id="d5cf901c-07ec-4a1f-b07d-c8ae16fed7ec" />
 </Solution>

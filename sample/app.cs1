@@ -1,0 +1,8 @@
+#!/usr/bin/env -S dotnet run --file
+#:package RefFile@0.1.0
+
+[assembly: RefFile("common.cs1")]
+
+var data = new CommonData("abc");
+data.Print();
+
