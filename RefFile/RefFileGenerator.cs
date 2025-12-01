@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 
 namespace RefFile;
@@ -175,8 +176,11 @@ public partial class RefFileGenerator : IIncrementalGenerator
             var line = lineEnd < 0 ? scan : scan.Slice(0, lineEnd);
             scan = scan.Slice(line.Length);
 
+            // コメント行判定。行コメントだけサポート。
+            var commentLine = line.TrimStart().StartsWith("//");
+
             // ディレクティブでない行を検出したら、残り全てをそのまま追加して終了
-            if (!line.StartsWith("#"))
+            if (!commentLine && !line.StartsWith("#"))
             {
                 code.Append(line.ToArray());
                 code.Append(scan.ToArray());
@@ -187,7 +191,7 @@ public partial class RefFileGenerator : IIncrementalGenerator
             var termLen = scan.IsEmpty ? 0 : (scan.StartsWith("\r\n") ? 2 : 1);
 
             // 取り込みに当たって除去すべき行であるかを判定
-            var ignoreLine = line.StartsWith("#:") || line.StartsWith("#!");
+            var ignoreLine = !commentLine && (line.StartsWith("#:") || line.StartsWith("#!"));
             if (!ignoreLine)
             {
                 // 除去しない場合はそのまま行を(改行込みで)追加
