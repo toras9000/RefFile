@@ -1,4 +1,0 @@
-public record CommonData(string Name)
-{
-    public void Print() => Console.WriteLine(this.Name);
-}

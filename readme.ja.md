@@ -25,19 +25,25 @@
 
 - common.cs  
     ```csharp:common.cs
-    public record CommonData(string Name)
+    #:package Humanizer.Core@3.0.1
+    // File-based directives within referenced files will be deleted.
+    using Humanizer;
+
+    public record CommonData(long Value)
     {
-        public void Print() => Console.WriteLine(this.Name);
+        public void Print() => Console.WriteLine(this.Value.ToMetric(decimals: 2));
     }
     ```
 
-- app.cs
+- app.cs  
     ```csharp:app.cs
     #!/usr/bin/env -S dotnet run --file
-    #:package RefFile@0.1.1
+    #:package RefFile@0.2.0
+    // Package references should be written in the main file.
+    #:package Humanizer.Core@3.0.1
 
     [assembly: RefFile("common.cs")]
 
-    var data = new CommonData("abc");
+    var data = new CommonData(123456);
     data.Print();
     ```
